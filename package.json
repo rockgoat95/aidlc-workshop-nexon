@@ -1,0 +1,19 @@
+{
+  "name": "table-order",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "db:migrate": "npm run migrate --workspace=packages/backend",
+    "db:seed": "npm run seed --workspace=packages/backend",
+    "db:generate": "npm run generate --workspace=packages/backend"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  }
+}
