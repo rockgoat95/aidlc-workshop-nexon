@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/client';
 import { Loading, ErrorMessage } from '../../shared';
 import { MenuCard } from './MenuCard';
+import { useCartStore } from '../../stores/cart-store';
 
 interface Menu {
   id: string;

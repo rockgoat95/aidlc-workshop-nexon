@@ -6,7 +6,7 @@ const menuService = new MenuService();
 export class MenuController {
   async list(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const storeId = req.user!.storeId;
+      const storeId = req.user?.storeId || req.query.storeId as string || 'store-001';
       const categoryId = req.query.categoryId as string | undefined;
       const result = await menuService.getMenus(storeId, categoryId);
       res.json(result);

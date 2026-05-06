@@ -7,9 +7,9 @@ const router = Router();
 const menuController = new MenuController();
 const categoryController = new CategoryController();
 
-// Customer menu routes (auth required)
-router.get('/menus', authMiddleware, menuController.list);
-router.get('/menus/:id', authMiddleware, menuController.detail);
+// Customer menu routes (no auth required for browsing)
+router.get('/menus', menuController.list);
+router.get('/menus/:id', menuController.detail);
 
 // Admin menu routes
 router.post('/admin/menus', authMiddleware, adminOnly, menuController.create);

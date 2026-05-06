@@ -6,6 +6,8 @@ import { MenuList } from './features/menu/MenuList';
 import { CartPanel } from './features/cart/CartPanel';
 import { OrderConfirm } from './features/order/OrderConfirm';
 import { OrderHistory } from './features/order/OrderHistory';
+import { OrderDashboard } from './features/admin/dashboard/OrderDashboard';
+import { TableManagement } from './features/admin/table-management/TableManagement';
 
 function App() {
   return (
@@ -20,9 +22,9 @@ function App() {
 
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<div>대시보드 (Unit 4에서 구현)</div>} />
-          <Route path="/admin/menus" element={<div>메뉴 관리 (Unit 2에서 구현)</div>} />
-          <Route path="/admin/tables" element={<div>테이블 관리 (Unit 5에서 구현)</div>} />
+          <Route path="/admin/dashboard" element={<OrderDashboard />} />
+          <Route path="/admin/menus" element={<div>메뉴 관리 (추후 구현)</div>} />
+          <Route path="/admin/tables" element={<TableManagement />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
