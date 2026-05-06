@@ -18,33 +18,33 @@
 ## Execution Checklist
 
 ### Phase 1: Personas Generation
-- [ ] 고객(Customer) 페르소나 정의
-- [ ] 관리자(Admin) 페르소나 정의
-- [ ] 페르소나별 목표, 동기, 불만사항 정리
-- [ ] personas.md 파일 생성
+- [x] 고객(Customer) 페르소나 정의
+- [x] 관리자(Admin) 페르소나 정의
+- [x] 페르소나별 목표, 동기, 불만사항 정리
+- [x] personas.md 파일 생성
 
 ### Phase 2: User Stories - Customer
-- [ ] FR-C01 기반 스토리: 테이블 태블릿 자동 로그인
-- [ ] FR-C02 기반 스토리: 메뉴 조회 및 탐색
-- [ ] FR-C03 기반 스토리: 장바구니 관리
-- [ ] FR-C04 기반 스토리: 주문 생성
-- [ ] FR-C05 기반 스토리: 주문 내역 조회
+- [x] FR-C01 기반 스토리: 테이블 태블릿 자동 로그인
+- [x] FR-C02 기반 스토리: 메뉴 조회 및 탐색
+- [x] FR-C03 기반 스토리: 장바구니 관리
+- [x] FR-C04 기반 스토리: 주문 생성
+- [x] FR-C05 기반 스토리: 주문 내역 조회
 
 ### Phase 3: User Stories - Admin
-- [ ] FR-A01 기반 스토리: 매장 인증
-- [ ] FR-A02 기반 스토리: 실시간 주문 모니터링
-- [ ] FR-A03 기반 스토리: 테이블 관리
-- [ ] FR-A04 기반 스토리: 메뉴 관리
+- [x] FR-A01 기반 스토리: 매장 인증
+- [x] FR-A02 기반 스토리: 실시간 주문 모니터링
+- [x] FR-A03 기반 스토리: 테이블 관리
+- [x] FR-A04 기반 스토리: 메뉴 관리
 
 ### Phase 4: Validation
-- [ ] INVEST 원칙 검증
-- [ ] Acceptance Criteria 완전성 확인
-- [ ] 페르소나-스토리 매핑 검증
-- [ ] stories.md 최종 생성
+- [x] INVEST 원칙 검증
+- [x] Acceptance Criteria 완전성 확인
+- [x] 페르소나-스토리 매핑 검증
+- [x] stories.md 최종 생성
 
 ### Phase 5: Final Output
-- [ ] stories.md 최종 파일 생성
-- [ ] personas.md 최종 파일 생성
+- [x] stories.md 최종 파일 생성
+- [x] personas.md 최종 파일 생성
 
 ---
 
