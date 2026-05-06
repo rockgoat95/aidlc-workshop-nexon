@@ -5,6 +5,7 @@ interface AuthState {
   token: string | null;
   role: 'customer' | 'admin' | null;
   tableId: string | null;
+  tableNumber: number | null;
   sessionId: string | null;
   storeId: string | null;
   setAuth: (data: {
@@ -12,6 +13,7 @@ interface AuthState {
     role: 'customer' | 'admin';
     storeId: string;
     tableId?: string;
+    tableNumber?: number;
     sessionId?: string;
   }) => void;
   logout: () => void;
@@ -24,6 +26,7 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       role: null,
       tableId: null,
+      tableNumber: null,
       sessionId: null,
       storeId: null,
       setAuth: (data) => {
@@ -33,6 +36,7 @@ export const useAuthStore = create<AuthState>()(
           role: data.role,
           storeId: data.storeId,
           tableId: data.tableId || null,
+          tableNumber: data.tableNumber || null,
           sessionId: data.sessionId || null,
         });
       },
@@ -42,6 +46,7 @@ export const useAuthStore = create<AuthState>()(
           token: null,
           role: null,
           tableId: null,
+          tableNumber: null,
           sessionId: null,
           storeId: null,
         });

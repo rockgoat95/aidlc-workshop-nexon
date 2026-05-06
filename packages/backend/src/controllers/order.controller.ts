@@ -6,10 +6,14 @@ const orderService = new OrderService();
 export class OrderController {
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { sessionId, storeId } = req.user!;
+      const sessionId = req.user?.sessionId;
+      if (!sessionId) {
+        res.status(400).json({ error: 'Session ID is required. Please login first.' });
+        return;
+      }
       const { items, totalAmount } = req.body;
       const order = await orderService.createOrder({
-        tableSessionId: sessionId!,
+        tableSessionId: sessionId,
         items,
         totalAmount,
       });

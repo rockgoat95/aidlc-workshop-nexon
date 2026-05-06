@@ -57,18 +57,18 @@ async function main() {
 
   // Create sample menus
   const menus = [
-    { name: '김치찌개', price: 9000, description: '돼지고기와 묵은지로 끓인 얼큰한 찌개', categoryId: 'cat-1' },
-    { name: '된장찌개', price: 8000, description: '두부와 야채가 듬뿍 들어간 구수한 찌개', categoryId: 'cat-1' },
-    { name: '제육볶음', price: 11000, description: '매콤달콤 양념에 볶은 돼지고기', categoryId: 'cat-1' },
-    { name: '비빔밥', price: 9500, description: '신선한 나물과 고추장의 조화', categoryId: 'cat-1' },
-    { name: '돈까스', price: 10000, description: '바삭한 수제 돈까스', categoryId: 'cat-1' },
-    { name: '계란말이', price: 5000, description: '부드러운 계란말이', categoryId: 'cat-2' },
-    { name: '김치전', price: 6000, description: '바삭하게 부친 김치전', categoryId: 'cat-2' },
-    { name: '떡볶이', price: 5500, description: '매콤한 떡볶이', categoryId: 'cat-2' },
-    { name: '콜라', price: 2000, description: null, categoryId: 'cat-3' },
-    { name: '사이다', price: 2000, description: null, categoryId: 'cat-3' },
-    { name: '맥주', price: 4000, description: '시원한 생맥주 500ml', categoryId: 'cat-3' },
-    { name: '소주', price: 4500, description: '참이슬 후레쉬', categoryId: 'cat-3' },
+    { name: '김치찌개', price: 9000, description: '돼지고기와 묵은지로 끓인 얼큰한 찌개', categoryId: 'cat-1', imageUrl: 'https://picsum.photos/seed/kimchi-stew/400/300' },
+    { name: '된장찌개', price: 8000, description: '두부와 야채가 듬뿍 들어간 구수한 찌개', categoryId: 'cat-1', imageUrl: 'https://picsum.photos/seed/doenjang/400/300' },
+    { name: '제육볶음', price: 11000, description: '매콤달콤 양념에 볶은 돼지고기', categoryId: 'cat-1', imageUrl: 'https://picsum.photos/seed/jeyuk/400/300' },
+    { name: '비빔밥', price: 9500, description: '신선한 나물과 고추장의 조화', categoryId: 'cat-1', imageUrl: 'https://picsum.photos/seed/bibimbap/400/300' },
+    { name: '돈까스', price: 10000, description: '바삭한 수제 돈까스', categoryId: 'cat-1', imageUrl: 'https://picsum.photos/seed/tonkatsu/400/300' },
+    { name: '계란말이', price: 5000, description: '부드러운 계란말이', categoryId: 'cat-2', imageUrl: 'https://picsum.photos/seed/egg-roll/400/300' },
+    { name: '김치전', price: 6000, description: '바삭하게 부친 김치전', categoryId: 'cat-2', imageUrl: 'https://picsum.photos/seed/kimchi-pancake/400/300' },
+    { name: '떡볶이', price: 5500, description: '매콤한 떡볶이', categoryId: 'cat-2', imageUrl: 'https://picsum.photos/seed/tteokbokki/400/300' },
+    { name: '콜라', price: 2000, description: null, categoryId: 'cat-3', imageUrl: 'https://picsum.photos/seed/cola/400/300' },
+    { name: '사이다', price: 2000, description: null, categoryId: 'cat-3', imageUrl: 'https://picsum.photos/seed/sprite/400/300' },
+    { name: '맥주', price: 4000, description: '시원한 생맥주 500ml', categoryId: 'cat-3', imageUrl: 'https://picsum.photos/seed/beer/400/300' },
+    { name: '소주', price: 4500, description: '참이슬 후레쉬', categoryId: 'cat-3', imageUrl: 'https://picsum.photos/seed/soju/400/300' },
   ];
 
   for (let i = 0; i < menus.length; i++) {
@@ -82,6 +82,7 @@ async function main() {
         name: menus[i].name,
         price: menus[i].price,
         description: menus[i].description,
+        imageUrl: menus[i].imageUrl,
         displayOrder: i,
       },
     });

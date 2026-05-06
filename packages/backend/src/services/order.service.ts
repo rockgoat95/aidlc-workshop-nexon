@@ -22,6 +22,14 @@ export class OrderService {
       throw new ValidationError('Order must have at least one item');
     }
 
+    // Verify session is still active
+    const session = await prisma.tableSession.findUnique({
+      where: { id: data.tableSessionId },
+    });
+    if (!session || session.endedAt) {
+      throw new ValidationError('Session has ended. Please login again.');
+    }
+
     // Verify calculated total
     const calculatedTotal = data.items.reduce(
       (sum, item) => sum + item.price * item.quantity,
@@ -59,6 +67,16 @@ export class OrderService {
   }
 
   async getOrdersBySession(sessionId: string) {
+    // Only return orders from active (non-ended) session
+    const session = await prisma.tableSession.findUnique({
+      where: { id: sessionId },
+    });
+
+    // If session is ended, return empty (customer should re-login)
+    if (session?.endedAt) {
+      return [];
+    }
+
     return prisma.order.findMany({
       where: { tableSessionId: sessionId },
       include: { items: true },

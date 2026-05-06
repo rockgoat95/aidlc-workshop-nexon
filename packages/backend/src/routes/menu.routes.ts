@@ -12,6 +12,7 @@ router.get('/menus', menuController.list);
 router.get('/menus/:id', menuController.detail);
 
 // Admin menu routes
+router.get('/admin/menus', authMiddleware, adminOnly, menuController.list);
 router.post('/admin/menus', authMiddleware, adminOnly, menuController.create);
 router.put('/admin/menus/:id', authMiddleware, adminOnly, menuController.update);
 router.delete('/admin/menus/:id', authMiddleware, adminOnly, menuController.remove);

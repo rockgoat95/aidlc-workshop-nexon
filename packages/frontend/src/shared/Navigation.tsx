@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCartStore } from '../stores/cart-store';
 import { useAuthStore } from '../stores/auth-store';
+import { useAdminAuthStore } from '../stores/admin-auth-store';
 
 export function Navigation() {
   const navigate = useNavigate();
@@ -9,9 +10,17 @@ export function Navigation() {
   const role = useAuthStore((s) => s.role);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const logout = useAuthStore((s) => s.logout);
+  const adminLogout = useAdminAuthStore((s) => s.logout);
+  const isAdminAuthenticated = useAdminAuthStore((s) => s.isAuthenticated);
+
+  // Hide navigation on login pages
+  if (location.pathname === '/login' || location.pathname === '/admin/login') {
+    return null;
+  }
 
   // Admin navigation
-  if (role === 'admin' && location.pathname.startsWith('/admin')) {
+  if (location.pathname.startsWith('/admin')) {
+    if (!isAdminAuthenticated()) return null;
     return (
       <nav style={{
         display: 'flex',
@@ -25,7 +34,7 @@ export function Navigation() {
         <NavButton to="/admin/menus" current={location.pathname} label="메뉴 관리" light />
         <div style={{ flex: 1 }} />
         <button
-          onClick={() => { logout(); navigate('/admin/login'); }}
+          onClick={() => { adminLogout(); navigate('/admin/login'); }}
           style={{ padding: '8px 16px', border: 'none', borderRadius: 8, backgroundColor: '#dc2626', color: '#fff', cursor: 'pointer', fontSize: 14 }}
           data-testid="admin-logout-button"
         >

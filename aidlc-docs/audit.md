@@ -306,3 +306,195 @@
 - packages/frontend/src/shared/index.ts
 
 ---
+
+## CONSTRUCTION PHASE - Code Generation Start
+**Timestamp**: 2026-05-06T00:19:00Z
+**User Input**: "Phase 0 까지 진행 해줄래?"
+**AI Response**: Units Generation 승인. CONSTRUCTION PHASE 진입. Unit 0 (Foundation) 코드 생성.
+**Context**: CONSTRUCTION - Code Generation, Unit 0
+
+---
+
+## Unit 0 (Foundation) - Code Generation
+**Timestamp**: 2026-05-06T00:20:00Z
+**AI Response**: Unit 0 기반 설정 코드 생성 완료.
+**Context**: CONSTRUCTION - Code Generation, Unit 0
+**Generated Files**:
+- package.json, turbo.json (Monorepo)
+- packages/backend/ (Express + Prisma + Auth + Error Handler + SSE)
+- packages/frontend/ (Vite + React + React Query + Zustand + shared UI)
+- Seed data (매장, 관리자, 카테고리, 테이블)
+
+---
+
+## .gitignore Fix
+**Timestamp**: 2026-05-06T00:21:00Z
+**User Input**: "지금 packages 디렉토리가 다 회색으로 표기되는데 깃에 안올라갔어?"
+**AI Response**: .gitignore의 .NET 섹션에 `packages/` 규칙이 있어 monorepo packages/ 폴더가 무시됨. 주석 처리로 해결.
+**Context**: Git configuration fix
+
+---
+
+## Database Migration: PostgreSQL → SQLite
+**Timestamp**: 2026-05-06T00:22:00Z
+**User Input**: "로컬에서 프로젝트를 돌려야하는데 지금 도커설치가 불가능한 상황이라 DB를 SQLite로 변경할건데"
+**AI Response**: Prisma datasource를 sqlite로 변경, OrderStatus enum을 String으로 변경 (SQLite enum 미지원), DATABASE_URL을 file:./dev.db로 변경.
+**Context**: Infrastructure decision change
+**Decision**: PostgreSQL → SQLite (로컬 개발 환경 제약)
+
+---
+
+## Environment Setup
+**Timestamp**: 2026-05-06T00:23:00Z
+**User Input**: "node js 설치 확인하고 실행할 수 있는 환경 구축해줘"
+**AI Response**: scoop 설치 → Node.js LTS v24.15.0 설치 → npm install → prisma migrate → seed 실행 → npm run dev 성공
+**Context**: Development environment setup
+**Tools Installed**: scoop, Node.js v24.15.0, npm 11.12.1
+
+---
+
+## Turborepo Configuration Fixes
+**Timestamp**: 2026-05-06T00:24:00Z
+**AI Response**: turbo.json에 `packageManager` 필드 추가, `pipeline` → `tasks` 변경 (Turbo v2 호환)
+**Context**: Build tool configuration
+
+---
+
+## Phase 1 - Code Generation (Unit 1, 2, 3)
+**Timestamp**: 2026-05-06T00:25:00Z
+**User Input**: "Phase 1 우선 전체 다 진행해줘"
+**AI Response**: Unit 1(인증), Unit 2(메뉴), Unit 3(장바구니+주문) Backend + Frontend 코드 생성 완료.
+**Context**: CONSTRUCTION - Code Generation, Phase 1
+
+**Unit 1 (인증)**:
+- auth.controller.ts, auth.service.ts, auth.routes.ts
+- AdminLogin.tsx
+
+**Unit 2 (메뉴)**:
+- menu.controller.ts, menu.service.ts, category.controller.ts, category.service.ts, menu.routes.ts
+- MenuList.tsx, MenuCard.tsx
+
+**Unit 3 (장바구니+주문)**:
+- order.controller.ts, order.service.ts, order.routes.ts
+- cart-store.ts, CartPanel.tsx, OrderConfirm.tsx, OrderHistory.tsx
+
+---
+
+## Phase 2 - Code Generation (Unit 4, 5)
+**Timestamp**: 2026-05-06T00:26:00Z
+**User Input**: "Phase 2 진행하고 유닛별로 커밋 만들어줘"
+**AI Response**: Unit 4(주문 모니터링), Unit 5(테이블 관리) 코드 생성 완료.
+**Context**: CONSTRUCTION - Code Generation, Phase 2
+
+**Unit 4 (주문 모니터링)**:
+- OrderDashboard.tsx, TableCard.tsx, OrderDetail.tsx (SSE 연결, 상태 변경, 삭제)
+
+**Unit 5 (테이블 관리)**:
+- table.service.ts, table.controller.ts, table.routes.ts
+- TableManagement.tsx (설정, 이용완료)
+
+---
+
+## Phase 3 - Integration
+**Timestamp**: 2026-05-06T00:27:00Z
+**User Input**: "Phase 3 도 그냥 진행해줘"
+**AI Response**: 통합 완료 - 테이블 로그인 UI, 네비게이션 바, 전체 라우팅 연결.
+**Context**: CONSTRUCTION - Code Generation, Phase 3
+
+**Generated**:
+- TableLogin.tsx (고객 테이블 로그인)
+- Navigation.tsx (고객 하단 탭 + 관리자 상단 네비)
+- App.tsx 라우팅 통합
+
+---
+
+## Bug Fix: Menu API Authentication
+**Timestamp**: 2026-05-06T00:28:00Z
+**User Input**: "메뉴를 불러올 수 없데"
+**AI Response**: 고객 메뉴 조회 API에서 인증 미들웨어 제거 (메뉴 탐색은 로그인 없이 가능해야 함). storeId를 req.user 대신 기본값 사용.
+**Context**: Bug fix - authentication requirement
+
+---
+
+## Feature: Sample Menu Data with Images
+**Timestamp**: 2026-05-06T00:29:00Z
+**User Input**: "샘플 메뉴좀 추가해줘", "메뉴 사진좀 넣어줘"
+**AI Response**: Seed 데이터에 12개 메뉴 추가 (메인 5, 사이드 3, 음료 4). picsum.photos placeholder 이미지 URL 추가.
+**Context**: Sample data enhancement
+
+---
+
+## Bug Fix: Root URL Redirect + Auth Flow
+**Timestamp**: 2026-05-06T00:30:00Z
+**User Input**: "root url에서 세팅된 테이블 정보를 알수 없으니 화면에 접속되어 있는게 의미 없는거 같아"
+**AI Response**: RootPage 컴포넌트 추가 - 로그인 안 됐으면 TableLogin 표시, 됐으면 테이블 정보 헤더 + MenuList 표시. CustomerGuard, AdminGuard 추가.
+**Context**: UX improvement - authentication flow
+
+---
+
+## Feature: Cart Button Interaction + Badge
+**Timestamp**: 2026-05-06T00:31:00Z
+**User Input**: "메뉴에서 담기 버튼 인터렉티브 좀 넣어주고 벳지를 추가해서 내가 메뉴에 담은걸 확인할 수 있도록 해줘"
+**AI Response**: MenuCard에 담기 버튼 애니메이션 (초록색 전환 + scale), 수량 뱃지 (우측 상단 파란 원) 추가.
+**Context**: UX improvement - cart feedback
+
+---
+
+## Bug Fix: API Base URL
+**Timestamp**: 2026-05-06T00:32:00Z
+**User Input**: "http://localhost:3000/api/tables/login 로 로그인을 하고 있는거 같아 프론트에서 API 서버 세팅이 잘못된거 같아"
+**AI Response**: Axios baseURL을 '/api' → 'http://localhost:3001/api'로 변경. Vite proxy가 Turborepo 환경에서 제대로 동작하지 않는 문제 해결.
+**Context**: Bug fix - API proxy configuration
+
+---
+
+## Feature: Admin/Customer Auth Separation
+**Timestamp**: 2026-05-06T00:33:00Z
+**User Input**: "서로 분리해줘" (고객/관리자 세션)
+**AI Response**: admin-auth-store.ts 별도 생성. 고객은 auth-storage, 관리자는 admin-auth-storage로 localStorage 분리. 같은 브라우저에서 동시 로그인 가능.
+**Context**: Architecture improvement - session separation
+
+---
+
+## Bug Fix: Admin Navigation + Route Guard
+**Timestamp**: 2026-05-06T00:34:00Z
+**User Input**: "/admin 쪽이야" (이상한 부분), "/admin에 접속하면 인증 여부를 확인해야 하는데"
+**AI Response**: Navigation에서 /admin/login 시 네비 숨김, /admin 접속 시 AdminRootRedirect 추가 (로그인 됐으면 dashboard, 안 됐으면 login으로).
+**Context**: Bug fix - admin routing
+
+---
+
+## Bug Fix: Table Login Navigate
+**Timestamp**: 2026-05-06T00:35:00Z
+**User Input**: "테이블 선택해서 인증 요청하니 API는 200인데 화면은 안넘어가"
+**AI Response**: TableLogin에서 navigate('/') 복원. 로그인 성공 후 RootPage가 리렌더링되어 MenuList로 전환.
+**Context**: Bug fix - navigation after login
+
+---
+
+## Feature: Admin Menu Management UI
+**Timestamp**: 2026-05-06T00:36:00Z
+**User Input**: "미구현 기능 먼저 채워줘"
+**AI Response**: AdminMenuManagement.tsx 생성 - 메뉴 추가/수정/삭제 모달 폼, 카테고리 선택, 이미지 URL 입력. OrderHistory에 5초 polling 추가.
+**Context**: Feature completion - admin menu CRUD UI
+
+---
+
+## Bug Fix: Session Management on Table Complete
+**Timestamp**: 2026-05-06T00:37:00Z
+**User Input**: "관리자 대시보드에서 이용완료 처리를해도, 테이블에선 기존 주문내역이 다 확인가능하고 이후에 추가 주문시 관리자 대시보드에 표시되지 않는 버그가있어"
+**AI Response**: 
+1. 종료된 세션의 주문 조회 시 빈 배열 반환
+2. 종료된 세션으로 주문 시도 시 에러 반환
+3. 이용완료 시 새 세션 즉시 생성하지 않음 (다음 로그인 시 생성)
+**Context**: Bug fix - session lifecycle management
+
+---
+
+## Bug Fix: Table Complete Button State
+**Timestamp**: 2026-05-06T00:38:00Z
+**User Input**: "관리자 대시보드에서 이용완료를 누르면 이용완료처리가되지만 계속 이용완료 버튼이 활성화 되어 있어"
+**AI Response**: 이용완료 시 새 세션 자동 생성 로직 제거. 세션 종료 후 대시보드에서 해당 테이블이 자동으로 사라짐 (endedAt != null 필터링).
+**Context**: Bug fix - UI state after table completion
+
+---

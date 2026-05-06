@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../stores/auth-store';
+import { useAdminAuthStore } from '../../stores/admin-auth-store';
 import apiClient from '../../api/client';
 import { Button } from '../../shared';
 
@@ -10,7 +10,7 @@ export function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const setAuth = useAuthStore((s) => s.setAuth);
+  const setAuth = useAdminAuthStore((s) => s.setAuth);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,7 +20,7 @@ export function AdminLogin() {
 
     try {
       const { data } = await apiClient.post('/admin/login', { storeId, username, password });
-      setAuth({ token: data.token, role: 'admin', storeId });
+      setAuth({ token: data.token, storeId, username });
       navigate('/admin/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.error || '로그인에 실패했습니다.');

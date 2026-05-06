@@ -29,6 +29,7 @@ export function TableLogin() {
         role: 'customer',
         storeId,
         tableId: data.tableId,
+        tableNumber: parseInt(tableNumber),
         sessionId: data.sessionId,
       });
       navigate('/');

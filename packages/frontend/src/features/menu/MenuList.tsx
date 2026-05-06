@@ -5,6 +5,7 @@ import apiClient from '../../api/client';
 import { Loading, ErrorMessage } from '../../shared';
 import { MenuCard } from './MenuCard';
 import { useCartStore } from '../../stores/cart-store';
+import { useAuthStore } from '../../stores/auth-store';
 
 interface Menu {
   id: string;
@@ -39,6 +40,22 @@ export function MenuList() {
 
   return (
     <div style={{ padding: 16 }}>
+      {/* Table Info Header */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '12px 16px',
+        marginBottom: 16,
+        backgroundColor: '#eff6ff',
+        borderRadius: 8,
+      }} data-testid="table-info-header">
+        <span style={{ fontWeight: 600, color: '#1e40af' }}>
+          🍽️ 테이블 {useAuthStore.getState().tableNumber || ''}번
+        </span>
+        <span style={{ fontSize: 13, color: '#6b7280' }}>맛있는 식당</span>
+      </div>
+
       {/* Category Tabs */}
       <div
         style={{ display: 'flex', gap: 8, overflowX: 'auto', marginBottom: 20, paddingBottom: 8 }}

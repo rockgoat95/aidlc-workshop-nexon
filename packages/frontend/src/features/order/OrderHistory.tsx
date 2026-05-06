@@ -34,6 +34,7 @@ export function OrderHistory() {
       return data.orders as Order[];
     },
     enabled: !!sessionId,
+    refetchInterval: 5000, // Poll every 5 seconds for status updates
   });
 
   if (isLoading) return <Loading />;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:3001/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -9,7 +9,15 @@ const apiClient = axios.create({
 
 // Request interceptor: attach token
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  // Use admin token for admin API calls, customer token for others
+  const adminAuth = JSON.parse(localStorage.getItem('admin-auth-storage') || '{}');
+  const customerAuth = JSON.parse(localStorage.getItem('auth-storage') || '{}');
+
+  const isAdminRequest = config.url?.includes('/admin');
+  const token = isAdminRequest
+    ? adminAuth?.state?.token
+    : customerAuth?.state?.token;
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
