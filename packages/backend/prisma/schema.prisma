@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tables Table[]
+  admins Admin[]
+  categories Category[]
+  menus  Menu[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  storeId   String
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, username])
+}
+
+model Table {
+  id          String   @id @default(uuid())
+  storeId     String
+  tableNumber Int
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  store    Store          @relation(fields: [storeId], references: [id])
+  sessions TableSession[]
+
+  @@unique([storeId, tableNumber])
+}
+
+model TableSession {
+  id        String    @id @default(uuid())
+  tableId   String
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+
+  table  Table   @relation(fields: [tableId], references: [id])
+  orders Order[]
+}
+
+model Category {
+  id           String @id @default(uuid())
+  storeId      String
+  name         String
+  displayOrder Int    @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  store Store  @relation(fields: [storeId], references: [id])
+  menus Menu[]
+}
+
+model Menu {
+  id           String  @id @default(uuid())
+  storeId      String
+  categoryId   String
+  name         String
+  price        Int
+  description  String?
+  imageUrl     String?
+  displayOrder Int     @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  store      Store       @relation(fields: [storeId], references: [id])
+  category   Category    @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+}
+
+model Order {
+  id             String      @id @default(uuid())
+  tableSessionId String
+  orderNumber    String
+  totalAmount    Int
+  status         OrderStatus @default(PENDING)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  tableSession TableSession @relation(fields: [tableSessionId], references: [id])
+  items        OrderItem[]
+}
+
+model OrderItem {
+  id       String @id @default(uuid())
+  orderId  String
+  menuId   String
+  menuName String
+  quantity Int
+  price    Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menu  Menu  @relation(fields: [menuId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  COMPLETED
+}
